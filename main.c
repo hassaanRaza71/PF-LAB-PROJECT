@@ -78,3 +78,33 @@ printf("Enter Name: ");
     fgets(p.disease, sizeof(p.disease), stdin);
     remove_newline(p.disease);
 
+  p.room_no = assign_room();
+    if (p.room_no == -1) {
+        printf("No rooms available. Cannot admit patient.\n");
+        return;
+    }
+
+    patients[patient_count] = p;
+    patient_count++;
+
+    printf("Patient added! Assigned Room: %d\n", p.room_no);
+}
+
+void list_patients() {
+    if (patient_count == 0) {
+        printf("No patients available.\n");
+        return;
+    }
+
+    printf("\n--- Patient List ---\n");
+    for (int i = 0; i < patient_count; i++) {
+        printf("ID: %d\nName: %s\nGender: %s\nAge: %d\nDisease: %s\nRoom: %d\n\n",
+               patients[i].id,
+               patients[i].name,
+               patients[i].gender,
+               patients[i].age,
+               patients[i].disease,
+               patients[i].room_no);
+    }
+}
+
