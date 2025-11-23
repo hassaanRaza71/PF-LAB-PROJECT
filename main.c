@@ -108,3 +108,28 @@ void list_patients() {
     }
 }
 
+int main() {
+    char buffer[10];
+    int choice;
+
+    while (1) {
+        printf("\n--- Hospital Management System ---\n");
+        printf("1. Add Patient\n");
+        printf("2. List Patients\n");
+        printf("3. Search Patient\n");
+        printf("4. Delete Patient\n");
+        printf("5. Show Rooms\n");
+        printf("6. Exit\n");
+        printf("Enter choice: ");
+
+        fgets(buffer, sizeof(buffer), stdin);
+        choice = to_int(buffer);
+
+        if (choice == 1) add_patient();
+        else if (choice == 2) list_patients();
+        else if (choice == 3) search_patient();
+        else if (choice == 4) delete_patient();
+        else if (choice == 5) show_rooms();
+        else if (choice == 6) break;
+        else printf("Invalid choice!\n");
+    }
