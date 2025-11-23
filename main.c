@@ -13,3 +13,8 @@ typedef struct {
     int room_no;
 } Patient;
 
+Patient patients[MAX_PATIENTS];
+int patient_count = 0;
+
+int rooms[MAX_ROOMS];
+
