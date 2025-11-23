@@ -61,3 +61,20 @@ void add_patient() {
     Patient p;
     p.id = patient_count + 1;
 
+
+printf("Enter Name: ");
+    fgets(p.name, sizeof(p.name), stdin);
+    remove_newline(p.name);
+
+    printf("Enter Gender: ");
+    fgets(p.gender, sizeof(p.gender), stdin);
+    remove_newline(p.gender);
+
+    printf("Enter Age: ");
+    scanf("%d", &p.age);
+    getchar();
+
+    printf("Enter Disease: ");
+    fgets(p.disease, sizeof(p.disease), stdin);
+    remove_newline(p.disease);
+
