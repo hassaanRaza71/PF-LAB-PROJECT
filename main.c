@@ -107,6 +107,58 @@ void list_patients() {
                patients[i].room_no);
     }
 }
+void search_patient() {
+    char buffer[20];
+    int id;
+
+    printf("Enter patient ID to search: ");
+    fgets(buffer, sizeof(buffer), stdin);
+    id = to_int(buffer);
+
+    for (int i = 0; i < patient_count; i++) {
+        if (patients[i].id == id) {
+            printf("\nPatient Found:\n");
+            printf("ID: %d\nName: %s\nGender: %s\nAge: %d\nDisease: %s\nRoom: %d\n",
+                   patients[i].id,
+                   patients[i].name,
+                   patients[i].gender,
+                   patients[i].age,
+                   patients[i].disease,
+                   patients[i].room_no);
+            return;
+        }
+    }
+    printf("Patient with ID %d not found.\n", id);
+}
+
+void delete_patient() {
+    char buffer[20];
+    int id;
+
+    printf("Enter patient ID to delete: ");
+    fgets(buffer, sizeof(buffer), stdin);
+    id = to_int(buffer);
+
+    for (int i = 0; i < patient_count; i++) {
+        if (patients[i].id == id) {
+            free_room(patients[i].room_no);
+
+            for (int j = i; j < patient_count - 1; j++) {
+                patients[j] = patients[j + 1];
+            }
+
+            patient_count--;
+            printf("Patient deleted and room freed!\n");
+            return;
+        }
+    }
+
+    printf("Patient with ID %d not found.\n", id);
+}
+
+
+
+
 
 int main() {
     char buffer[10];
