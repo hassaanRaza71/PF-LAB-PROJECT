@@ -16,13 +16,26 @@ typedef struct {
 
 Patient patients[MAX_PATIENTS];
 int patient_count = 0;
-
 int rooms[MAX_ROOMS];
+
+
+void remove_newline(char *str);
+int to_int(char *str);
+void show_rooms();
+int assign_room();
+void free_room(int room_no);
+void add_patient();
+void list_patients();
+void search_patient();
+void delete_patient();
+void save_to_file();
+void load_from_file();
 
 
 int to_int(char *str) {
     return atoi(str);
 }
+
 void remove_newline(char *str) {
     int len = strlen(str);
     if (len > 0 && str[len - 1] == '\n') {
