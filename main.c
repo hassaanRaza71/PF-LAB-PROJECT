@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define MAX_PATIENTS 100
 #define MAX_ROOMS 10
@@ -19,11 +20,8 @@ int patient_count = 0;
 int rooms[MAX_ROOMS];
 
 
-void remove_newline(char *str) {
-    int len = strlen(str);
-    if (len > 0 && str[len - 1] == '\n') {
-        str[len - 1] = '\0';
-    }
+int to_int(char *str) {
+    return atoi(str);
 }
 
 void show_rooms() {
@@ -56,7 +54,6 @@ void add_patient() {
     if (patient_count >= MAX_PATIENTS) {
         printf("Patient list full!\n");
         return;
-        save_to_file();
     }
 
     Patient p;
@@ -89,6 +86,7 @@ printf("Enter Name: ");
     patient_count++;
 
     printf("Patient added! Assigned Room: %d\n", p.room_no);
+    save_to_file();
 }
 
 void list_patients() {
@@ -140,6 +138,7 @@ void delete_patient() {
     fgets(buffer, sizeof(buffer), stdin);
     id = to_int(buffer);
 
+    
     for (int i = 0; i < patient_count; i++) {
         if (patients[i].id == id) {
             free_room(patients[i].room_no);
@@ -150,8 +149,8 @@ void delete_patient() {
 
             patient_count--;
             printf("Patient deleted and room freed!\n");
+            save_to_file();  // MOVED HERE (was after return before)
             return;
-            save_to_file();
         }
     }
 
@@ -220,6 +219,14 @@ int main() {
         else if (choice == 3) search_patient();
         else if (choice == 4) delete_patient();
         else if (choice == 5) show_rooms();
-        else if (choice == 6) break;
+        else if (choice == 6) {
+            save_to_file();
+            printf("Data saved. Exiting...\n");
+            break;
+        }
         else printf("Invalid choice!\n");
     }
+
+    return 0;
+}  
+
