@@ -168,7 +168,7 @@ void delete_patient() {
 
             patient_count--;
             printf("Patient deleted and room freed!\n");
-            save_to_file();  // MOVED HERE (was after return before)
+            save_to_file();
             return;
         }
     }
