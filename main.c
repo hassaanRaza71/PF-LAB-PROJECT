@@ -56,6 +56,7 @@ void add_patient() {
     if (patient_count >= MAX_PATIENTS) {
         printf("Patient list full!\n");
         return;
+        save_to_file();
     }
 
     Patient p;
@@ -150,6 +151,7 @@ void delete_patient() {
             patient_count--;
             printf("Patient deleted and room freed!\n");
             return;
+            save_to_file();
         }
     }
 
@@ -198,6 +200,7 @@ void load_from_file() {
 int main() {
     char buffer[10];
     int choice;
+    load_from_file();
 
     while (1) {
         printf("\n--- Hospital Management System ---\n");
