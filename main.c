@@ -156,6 +156,41 @@ void delete_patient() {
     printf("Patient with ID %d not found.\n", id);
 }
 
+void save_to_file() {
+    FILE *fp = fopen("patients.txt", "w");
+
+    for (int i = 0; i < patient_count; i++) {
+        fprintf(fp, "%d|%s|%s|%d|%s|%d\n",
+                patients[i].id,
+                patients[i].name,
+                patients[i].gender,
+                patients[i].age,
+                patients[i].disease,
+                patients[i].room_no);
+    }
+
+    fclose(fp);
+}
+
+void load_from_file() {
+    FILE *fp = fopen("patients.txt", "r");
+    if (fp == NULL) return;
+
+    while (fscanf(fp, "%d|%49[^|]|%9[^|]|%d|%49[^|]|%d\n",
+                  &patients[patient_count].id,
+                  patients[patient_count].name,
+                  patients[patient_count].gender,
+                  &patients[patient_count].age,
+                  patients[patient_count].disease,
+                  &patients[patient_count].room_no) == 6) {
+
+        rooms[patients[patient_count].room_no - 1] = 1;
+        patient_count++;
+    }
+
+    fclose(fp);
+}
+
 
 
 
